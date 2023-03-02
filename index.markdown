@@ -4,3 +4,9 @@
 
 layout: home
 ---
+
+# scripts
+
+## introduction
+
+github scripts page
