@@ -69,6 +69,7 @@ Les machines de votre infrastructure locale doivent avoir des IPs prédéfinies,
 | [btcnode](#mynode)        | 192.168.1.41    |                           | [**CRYP3**](#cryp3)
 | [ethnode](#ethnode)       | 192.168.1.42    |                           | [**CRYP3**](#cryp3)
 | bigtrade                  | 192.168.1.100   |                           |
+| [nextcloud](#nextcloud)   | 192.168.1.120   |                           | [**MM0**](#mm0)
 | jeedom                    | 192.168.1.140   |                           |
 | zwavegwt                  | 192.168.1.141   |                           |
 | borne wifi1               | 192.168.1.151   |                           |
