@@ -103,18 +103,21 @@ TODO
 
 #### sur manager
 
-|                     | unbound           | hsnd | alfis (ygg)                  |
+|  machines dispo     | unbound           | hsnd | alfis (ygg)                  |
+|---------------------|-------------------|------|------------------------------|
 | manager             | hsnd, master      | oui  | bootstrap master + tor local |
 | manager + fap       | fap, hnsd, master | oui  | bootstrap fap + tor local    |
 
 #### sur fap
 
-|                     | pihole          | tor-dns |
+|  machines dispo     | pihole          | tor-dns |
+|---------------------|-----------------|---------|
 | fap                 | cloudflare, tor | oui     |
 
 #### sur vpn
 
-|                     | bind         |
+|  machines dispo     | bind         |
+|---------------------|--------------|
 | vpn                 | fap, manager |
 
 #### utilisation
@@ -127,7 +130,8 @@ TODO
 
 #### sur manager
 
-|                     | tor                       | ygg public              | lokinet                  |
+|  machines dispo     | tor                       | ygg public              | lokinet                  |
+|---------------------|---------------------------|-------------------------|--------------------------|
 | manager             | oui, bootstrap sur master | bootstrap sur tor local | bootstrap sur ygg public |
 | manager + fap       | oui, bootstrap sur master | bootstrap sur tor local | bootstrap sur ygg public |
 | manager + vpn       | oui, bootstrap sur vpn    | bootstrap sur tor local | bootstrap sur ygg public |
@@ -135,11 +139,16 @@ TODO
 
 #### sur fap
 
-|                     | tor                     |
+|  machines dispo     | tor                     |
+|---------------------|-------------------------|
 | fap                 | oui, bootstrap local    |
 | fap + manager       | oui, bootstrap local    |
 | fap + vpn           | oui, bootstrap sur vpn  |
 | fap + manager + vpn | oui, bootstrap sur vpn  |
+
+**Configurer brave sur le réseau _hiddennet_**
+
+
 
 #### sur vpn
 
