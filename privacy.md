@@ -114,6 +114,13 @@ TODO
 |---------------------|-----------------|---------|
 | fap                 | cloudflare, tor | oui     |
 
+| service    | listen       | port |
+|------------|--------------|------|
+| pihole     | 0.0.0.0      | 53   |
+| cloudflare | 127.0.0.1    | 5053 |
+| tor-dns    | 127.0.0.1    | 6053 |
+
+
 #### sur vpn
 
 |  machines dispo     | bind         |
