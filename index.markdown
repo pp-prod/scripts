@@ -451,21 +451,18 @@ Remarque : A la question autoriser les http tunnel via apt catcher NG, répondre
 
 fap est l'acronyme pour "Free Acces Point".
 
-| OS supporté                        | machines supportées          | matériel nécessaire                                       |
-| ---------------------------------- | ---------------------------- | --------------------------------------------------------- |
-| ubuntu focal 20.04 serveur 64 bits | **seuls les Raspi3b ou 3b+** | une 1 clé USB, une antenne wifi, un lecteur de carte SIM  |
+| OS supporté                | machines supportées         | matériel nécessaire                               |
+|----------------------------|-----------------------------|---------------------------------------------------|
+| ubuntu focal 20.04 64 bits | **Raspi3b,3b+ ou RockPi3B** | 1 clé USB, 1 antenne wifi, 1 lecteur de carte SIM |
 
-**Attention, les cartes WiFi avec chipset RealTek 88XXau ( comme [celle-ci](https://pine64.com/product/rock64-usb-3-0-dual-band-1200mbps-wifi-802-11a-b-g-n-ac-rtl8812au-adapter/) ) sont supportées.**
+**Pour les RockPi3B, la clé USB wifi n'est pas nécessaire, le WIFI de la carte est utilisé.**
+**Attention, en USB, seules les cartes WiFi avec chipset RealTek 88XXau sont supportées.**
 
 Un __lsusb__ doit vous ressortir la ligne :
 
 ```
 0bda:8812 Realtek Semiconductor Corp. RTL8812AU 802.11a/b/g/n/ac 2T2R DB WLAN Adapter
 ```
-
-**Ainsi que les cartes ALFA Network AWUS036ACM.** 
-
-D'autres cartes sont en cours d'évalution, demandez directement sur le *chat telegram PpProd_scripts* laquelle a le support le plus abouti.
 
 ##### Règlages de votre box
 
@@ -485,17 +482,15 @@ L'usage typique peur être le(s) suivant(s) :
 - vous voulez héberger un serveur tor, mais votre fournisseur vous bloque ce service,
 - vous utilisez une connexion 4G pour votre réseau local, mais vous souhaitez rerouter molotov.tv et la mise a jour des machines sur un réseau bas débit.
 
-J'ai tourné pendant 3 ans de cette façon, avec une [clé 4G](https://lecrabeinfo.net/huawei-e3372-modem-usb-lte-4g-installer-firmware-hilink-routeur-firmware-stick-modem.html) et un abonnement à 10 euros pour 100Giga, et un abonnement à [2 euros chez Free mobile](http://mobile.free.fr/fiche-forfait-2-euros.html). Je disposais d'une box tv (mi box) avec molotov et canal, aucun problème. 
-
 Voir [dans confidentialité](privacy.md) pour plus d'informations.
 
 ##### Installation
 
-fap ne doit pas fonctionner avec un HD, mais uniquement avec une clé USB (ou un adapteur SD).
-fap doit obligatoirement être branché en USB avec une carte wifi compatible.
-Avant de commencer votre installation, vous devez avoir une carte SIM Free avec un forfait 2 Euros, branché sur un adaptateur USB. 
+- fap ne doit pas fonctionner avec un HD, mais uniquement avec une clé USB (ou un adapteur SD).
+- fap doit obligatoirement être branché en USB avec une carte wifi compatible (sauf RockPi3B).
+- Avant de commencer votre installation, vous devez avoir une carte SIM Free avec un forfait 2 Euros activée, branché sur un adaptateur USB. 
 
-La clé USB, la carte wifi et la carte SIM doivent être banchés en direct sur le Raspberry. Tout doit être branché avant de commencer l'installation. 
+Sur un Raspberry Pi3b(+), la clé USB, la carte wifi et la carte SIM doivent être banchés en direct. Tout doit être branché avant de commencer l'installation. 
 
 * Vous devez identifier votre *domain*, imaginons que vous ayez acheté "ppprod.ovh", ce sera votre *domain*.
 * Vous devez ensuite identifier votre *masterdomain*, si vous ne savez pas ce que c'est, et bien c'est que vous devez utiliser la valeur par défaut : *ppprod.biz*.
@@ -511,13 +506,17 @@ La clé USB, la carte wifi et la carte SIM doivent être banchés en direct sur 
   * USER_EMAIL=*<le mail donnée à l'association, celui sur lequel vous recevez les courriers de l'association>*
   * USER_NAME=*<le login de votre compte git sur le gitlab de l'association>*
 * Faites un *cd /root*, puis *mkdir ppprod && cd ppprod*,
-* Faites un *git clone 'http://www.ppprod.biz/gitlab/ppprod/scripts.git'*
+* Faites un *git clone 'https://www.ppprod.biz/gitlab/ppprod/scripts.git'*
 * Faites un *cd scripts*, puis un *vi .git/config*
-  * completez la ligne *url = http://www.ppprod.biz/gitlab/ppprod/scripts.git* en ajoutant *le login de votre compte git sur le gitlab de l'association* et *le mot de passe du gitlab*, ce qui doit donner la ligne *url = http://**le login**:**le mot de passe**@www.ppprod.biz/gitlab/ppprod/scripts.git*
+  * completez la ligne *url = https://www.ppprod.biz/gitlab/ppprod/scripts.git* en ajoutant *le login de votre compte git sur le gitlab de l'association* et *le mot de passe du gitlab*, ce qui doit donner la ligne *url = https://**le login**:**le mot de passe**@www.ppprod.biz/gitlab/ppprod/scripts.git*
 * Faites un *git pull*
 * Faites un *cd fap*
 * Lancez *./install.sh* et regardez que tout se passe bien
-  * en cas de problème, utilisez le *chat telegram PpProd_scripts* pour avoir des informations  
+  * en cas de problème, utilisez le *chat telegram PpProd_scripts* pour avoir des informations (l'invitation vous a été envoyé lors de votre souscription à l'association).  
+
+##### Les services en détail
+
+Voir dans dans [privacy.md](https://www.ppprod.biz/gitlab/ppprod/scripts/-/blob/master/privacy.md?ref_type=heads#fap).
 
 #### nut
 
@@ -739,25 +738,18 @@ Voir [dans infrastructure matérielle](network_topo.md#bornes_wifis).
 
 ## Exemples de configurations materielles
 
-| contact                      | domaine       | machine  |  matériel
-| ---------------------------- | ------------- | -------- |  -------- 
-| ???@???.com     | ppprod.biz    | manager  | cubietruck avec HD 250G
-|                              |               | fap      | RasPi3b+ avec clé USB, [WiFI](https://pine64.com/product/rock64-usb-3-0-dual-band-1200mbps-wifi-802-11a-b-g-n-ac-rtl8812au-adapter/) et [lecteur pour SIM free](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwisxa7v4ubtAhUFSxoKHXNbCG8QFjAAegQIAxAC&url=https%3A%2F%2Fwww.amazon.fr%2FSODIAL-Lecteur-carte-t%25C2%25A8%25C2%25A6l%25C2%25A8%25C2%25A6phone-portable%2Fdp%2FB00F4MH1PG&usg=AOvVaw0VVf3ZwEUXWI-bm3BAr5Gn)
-|                              |               | vpn      | Odroid C2
-|                              |               | gitlab   | Rock64 avec HD
-|                              |               | trade    | RasPi3b avec 1 HD 1T
-|                              | ppprod.ovh    | manager  | RasPi3b avec clé USB
-|                              |               | fap      | RasPi3b+ avec clé USB, [WiFI](https://pine64.com/product/rock64-usb-3-0-dual-band-1200mbps-wifi-802-11a-b-g-n-ac-rtl8812au-adapter/) et [lecteur pour SIM free](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwisxa7v4ubtAhUFSxoKHXNbCG8QFjAAegQIAxAC&url=https%3A%2F%2Fwww.amazon.fr%2FSODIAL-Lecteur-carte-t%25C2%25A8%25C2%25A6l%25C2%25A8%25C2%25A6phone-portable%2Fdp%2FB00F4MH1PG&usg=AOvVaw0VVf3ZwEUXWI-bm3BAr5Gn)
-|                              |               | vpn      | Odroid C2
-|                              |               | seedbox  | Odroid C2 avec HD 2T
-|                              |               | pms      | RasPi4 4G avec HD 4T
-|                              |               | mynode   | Rock64 avec 2 HD avec [boitier RAID1](https://www.amazon.fr/Ext-Raid-System-2xsata-5in/dp/B01N6AJUEI/)
-|                              |               | sentvpn  | Rock64 avec 1 HD 2T
-|                              |               | trade    | RasPi3b avec clé USB
-|                              |               | dappnode | RasPi4/8G avec Raid HD + cache LVM SSD
-| ???@???.com        | jaska.ovh     | manager  | RapsberryPI4 4G + 1 clé usb 64Go (Sd card + adaptateur Usb)
-|                              |               | trade    | RapsberryPI4 4G + 2 clés usb 64Go (Sd card + adaptateur Usb)
-|                              |               | mynode   | RapsberryPI4 4G avec 1 HD 2To USB3 auto alimente + 1 cable Y USB femelle pour alimenter suffisament le HD (la patte DATA vers le rapsberry, la patte charge vers le Hub) et 1 Hub USB pour gérer l'arret du DDR + 1 cable Y USB femelle pour ne pas tirer l'alim du DDR sur le Rabserry mais qu'a l'arret de la machine ça stoppe le HD. Il faut donc brancher le Hub sur la femelle du Y, la patte data vers le Rapsberry, la patte alim sur le Hub.
+| contact                      | domaine       | machine       |  matériel
+|------------------------------|---------------|---------------|---------- 
+| ???@???.com     | ppprod.biz    | manager       | OdroidC4 avec HD 250G
+|                              |               | fap           | RasPi3b+ avec clé USB, WiFI rtl8812au et lecteur USB pour SIM
+|                              |               | vpn           | Odroid C2
+|                              |               | gitlab        | Rock64 avec HD
+|                              |               | trade         | RockPi4 avec 1 HD 1T
+|                              | ppprod.ovh    | manager       | RockPi4 avec clé USB
+|                              |               | fap           | RasPi3b+ avec clé USB, WiFI rtl8812au et lecteur USB pour SIM 
+|                              |               | vpn           | Odroid C2
+|                              |               | seedbox       | Odroid C2 avec HD 2T
+|                              |               | nextcloud+pms | RasPi4 4G avec HD 4T
 
 
 ## Contacts en fonction des groupes
@@ -765,4 +757,3 @@ Voir [dans infrastructure matérielle](network_topo.md#bornes_wifis).
 | contact                      | groupe               
 | ---------------------------- | -------------------- 
 | ???@???.com     | tous                 
-| ???@???.com        | [**INF0**](#inf0), [**CRYP0**](#cryp0), [**CRYP1**](#cryp1)
