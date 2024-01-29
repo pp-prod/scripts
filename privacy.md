@@ -82,6 +82,63 @@ Si vous commencer à vouloir vous cacher, vous l'aurez compris, c'est très mal 
 
 #### manager
 
+Si le script d'install détecte:
+- que fap est accessible, ou
+- que manager dispose d'un accès au réseau _hiddennet_ (192.168.2.X), ou
+- que son _masterdomain_ est accessible,
+alors, les services d'anonymisation seront installés.
+
+Les services d'anonymisation qui tournent en direct sur manager sont:
+- tor (réseau sombre),
+  - qui requête en http via vpn (_hiddennet_), sinon,
+  - qui requête en http via son _masterdomain_.
+- unbound (resolveur de noms de domaines, DNS)
+  - qui délègue (forward) à fap, sinon, 
+  - qui délègue (forward) au service hnsd, sinon, 
+  - qui délègue (forward) au résolveur (DNS) de son _masterdomain_.
+- hnsd (resolveur de noms de domaines, DNS, non étatique, sur blockchain),
+  - qui démarre (bootstrap) sur des serveurs
+    - par son serveur central.
+
+Les services d'anonymisation qui tournent en lxc sur manager sont:
+  - dans torprivoxy:
+    - dnsmasq (resolveur de noms de domaines, DNS),
+      - qui délègue (forward) au tordns de manager, sinon, 
+      - si fap accessible:
+        - qui délègue (forward) au tordns de fap, sinon, 
+        - qui délègue (forward) au pihole de fap ;
+      - sinon:         
+        - qui délègue (forward) au résolveur (DNS) de son _masterdomain_, sinon, 
+        - qui délègue (forward) au DNS local de manager (unbound).
+    - privoxy (proxy http),
+      - qui délègue (forward) au tor local de manager.
+  - dans yggsquid:
+    - yggdrasil (réseau sombre),
+      - qui démarre (bootstrap) sur des serveurs
+        - par tor (réseau sombre) local de manager,
+        - par yggdrasil lui-même (local à yggsquid) pour se completer,
+        - par yggdrasil de fap.
+    - lokinet (réseau sombre),
+      - qui résout les noms de domaine par le unboud de lui-même (local à yggsquid)
+    - alfis  (resolveur de noms de domaines, DNS, non étatique, sur blockchain),
+      - qui démarre (bootstrap) sur des serveurs
+        - par son serveur central,
+        - par yggdrasil (local à yggsquid) pour se completer,
+    - unbound (resolveur de noms de domaines, DNS),
+      - pour les '.ygg':
+        - qui délègue (forward) à alfis local, 
+      - pour les '.loki':
+        - qui délègue (forward) à lokinet local,
+      - pour le reste: 
+        - qui délègue (forward) au resolveur (DNS) de torprivoxy (lxc sur manager), sinon, 
+        - qui délègue (forward) au résolveur (DNS) de manager (unbound).
+    - squid (proxy http),
+      - requête en http (sans délégation) pour les .ygg et .loki, sinon,
+      - si fap accessible:
+        - qui délègue (forward) au squid de onionsquid (lxc) sur fap, sinon,
+      - qui délègue (forward) au privoxy de torprivoxy (lxc) sur manager (local), sinon,
+      - qui délègue (forward) au tinyproxy sur manager (local) (filtre .onion, .ygg et .loki)
+
 #### fap
 
 #### searcheng
