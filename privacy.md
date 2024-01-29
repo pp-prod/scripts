@@ -86,9 +86,10 @@ Si le script d'install détecte:
 - que fap est accessible, ou
 - que manager dispose d'un accès au réseau _hiddennet_ (192.168.2.X), ou
 - que son _masterdomain_ est accessible,
-alors, les services d'anonymisation seront installés.
 
-Les services d'anonymisation qui tournent en direct sur manager sont:
+__alors__, les services d'anonymisation seront installés.
+
+Les services d'anonymisation qui tournent __en direct__ sur __manager__ sont:
 - tor (réseau sombre),
   - qui requête en http via vpn (_hiddennet_), sinon,
   - qui requête en http via son _masterdomain_.
@@ -100,8 +101,8 @@ Les services d'anonymisation qui tournent en direct sur manager sont:
   - qui démarre (bootstrap) sur des serveurs
     - par son serveur central.
 
-Les services d'anonymisation qui tournent en lxc sur manager sont:
-  - dans torprivoxy:
+Les services d'anonymisation qui tournent __en lxc__ sur manager sont:
+  - dans __torprivoxy__:
     - dnsmasq (resolveur de noms de domaines, DNS),
       - qui délègue (forward) au tordns de manager, sinon, 
       - si fap accessible:
@@ -112,7 +113,7 @@ Les services d'anonymisation qui tournent en lxc sur manager sont:
         - qui délègue (forward) au DNS local de manager (unbound).
     - privoxy (proxy http),
       - qui délègue (forward) au tor local de manager.
-  - dans yggsquid:
+  - dans __yggsquid__:
     - yggdrasil (réseau sombre),
       - qui démarre (bootstrap) sur des serveurs
         - par tor (réseau sombre) local de manager,
